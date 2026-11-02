@@ -36,7 +36,9 @@
         var k = b.parentNode, ac = !k.classList.contains('ak-acik');
         [].forEach.call(kok.querySelectorAll('.ak-acik'), function (y) { y.classList.remove('ak-acik'); y.querySelector('.ak-b').setAttribute('aria-expanded', 'false'); y.querySelector('.ak-d').hidden = true; });
         if (ac) { k.classList.add('ak-acik'); b.setAttribute('aria-expanded', 'true'); k.querySelector('.ak-d').hidden = false; }
-        ust(); k.scrollIntoView({ block: 'nearest' });
+        // Kartın üstü sabit bandın altında kalmasın: yalnız görünmüyorsa kaydırılır
+        var u = ust(), y = k.getBoundingClientRect().top;
+        if (y < u + 8 || y > innerHeight - 120) window.scrollBy(0, y - u - 12);
       });
     });
     var h = location.hash.slice(1);
