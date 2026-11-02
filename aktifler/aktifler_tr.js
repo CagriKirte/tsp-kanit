@@ -11,6 +11,13 @@
   function ust() {
     var h = document.querySelector('header') || document.querySelector('[class*=header]'), y = 0;
     if (h) y = Math.max(0, Math.round(h.getBoundingClientRect().bottom));
+    // Telefonda görünen bant, kaydırılınca ayrı sabit bir öğe: ekranın üstündeki sabit kaba bakılır
+    var e = document.elementFromPoint(innerWidth / 2, 2);
+    while (e && e !== document.body && !(K && K.contains(e))) {
+      var p = getComputedStyle(e).position;
+      if (p === 'fixed' || p === 'sticky') { y = Math.max(y, Math.round(e.getBoundingClientRect().bottom)); break; }
+      e = e.parentElement;
+    }
     if (K) K.style.setProperty('--ust', y + 'px');
     return y;
   }
