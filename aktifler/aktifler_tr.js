@@ -10,7 +10,7 @@
   // Tema üst bandının yüksekliği: yapışkan seçim çubuğu ve kaydırma payı buna göre iner
   function ust() {
     var h = document.querySelector('header') || document.querySelector('[class*=header]'), y = 0;
-    if (h) { var r = h.getBoundingClientRect(); if (r.bottom > 0 && r.top <= 0) y = Math.round(r.bottom); }
+    if (h) y = Math.max(0, Math.round(h.getBoundingClientRect().bottom));
     if (K) K.style.setProperty('--ust', y + 'px');
     return y;
   }
